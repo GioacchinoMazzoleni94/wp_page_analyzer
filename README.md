@@ -33,7 +33,7 @@ wp_page_analyzer/
 1.  **Clona il repository**
 
     ```bash
-    git clone [https://github.com/](https://github.com/)<tuo-username>/wp_page_analyzer.git
+    git clone https://github.com/GioacchinoMazzoleni94/wp_page_analyzer.git
     cd wp_page_analyzer
     ```
 
