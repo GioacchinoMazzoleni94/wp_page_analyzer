@@ -1,0 +1,19 @@
+{# templates/includes/overview.html #}
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <input id="searchInput" class="form-control w-50" placeholder="🔍 Filtra contenuti…">
+  <div>
+    <button id="exportCsv" class="btn btn-sm btn-outline-primary me-1">CSV</button>
+    <button id="exportJson" class="btn btn-sm btn-outline-secondary me-1">JSON</button>
+    <button id="exportMd" class="btn btn-sm btn-outline-success me-1">MD</button>
+    <button id="saveReport" class="btn btn-sm btn-outline-dark">Salva Report</button>
+    <input id="uploadReport" type="file" class="form-control form-control-sm d-inline-block ms-2" style="width:auto;">
+  </div>
+</div>
+
+<div id="summary"></div>
+<canvas id="chart" height="100"></canvas>
+
+<div class="accordion mt-3" id="contentAccordion"></div>
+
+<div id="brokenSection" class="mt-4"></div>

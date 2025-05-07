@@ -1,0 +1,19 @@
+{# templates/includes/accessibility.html #}
+
+<h5>Accessibilità</h5>
+<ul class="list-group mb-2">
+  <li class="list-group-item">Immagini: <span id="accessTotalImgs">–</span></li>
+  <li class="list-group-item">Missing alt: <span id="accessMissingAlt">–</span></li>
+  <li class="list-group-item">Form fields without label: <span id="accessFormFields">–</span></li>
+  <li class="list-group-item">Empty links: <span id="accessEmptyLinks">–</span></li>
+  <li class="list-group-item">Skip links: <span id="accessSkipLinks">–</span></li>
+  <li class="list-group-item">Landmarks: <span id="accessLandmarks">–</span></li>
+  <li class="list-group-item">Headings: <span id="accessHeadings">–</span></li>
+</ul>
+
+<div id="missingAltList" class="list-group mb-2"></div>
+
+<h6 class="mt-3">Link senza testo</h6>
+<ul id="emptyLinksList" class="list-group mb-2"></ul>
+
+<div id="accessAdvice" class="alert d-none"></div>

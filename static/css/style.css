@@ -1,0 +1,70 @@
+/* static/css/style.css */
+
+/* Impostazioni globali */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Loader: nascosto fino a quando JS non lo mostra */
+#loader {
+  display: none;
+  height: 150px;
+}
+#loader .spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+
+/* Dark mode */
+body.bg-dark {
+  background-color: #212529 !important;
+  color: #f8f9fa !important;
+}
+body.bg-dark a {
+  color: #0d6efd !important;
+}
+body.bg-dark .alert {
+  background-color: #343a40 !important;
+  color: #f8f9fa !important;
+}
+
+/* Tab pane padding */
+.tab-pane {
+  padding-top: 1rem;
+}
+
+/* Search input in Overview */
+#searchInput {
+  max-width: 300px;
+  margin-bottom: 1rem;
+}
+
+/* Modal SEO details code styling */
+#seoModalBody code {
+  background-color: #e9ecef;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Tables and lists */
+.list-group-item a {
+  word-break: break-all;
+}
+
+/* Footer */
+footer {
+  background-color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .nav-tabs.container {
+    flex-wrap: wrap;
+  }
+  .nav-tabs.container .nav-item {
+    flex: 1 1 50%;
+    text-align: center;
+  }
+}

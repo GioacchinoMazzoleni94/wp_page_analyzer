@@ -1,0 +1,16 @@
+{# templates/includes/security.html #}
+
+<h5>Sicurezza</h5>
+<ul class="list-group mb-2">
+  <li class="list-group-item">HSTS: <span id="secHsts">–</span></li>
+  <li class="list-group-item">HSTS max-age: <span id="secHstsMaxAge">–</span></li>
+  <li class="list-group-item">CSP: <span id="secCsp">–</span></li>
+  <li class="list-group-item">HttpOnly cookie: <span id="secHttpOnly">–</span></li>
+  <li class="list-group-item">Secure cookie: <span id="secCookieSecure">–</span></li>
+  <li class="list-group-item">X-Frame-Options: <span id="secXfo">–</span></li>
+  <li class="list-group-item">X-XSS-Protection: <span id="secXss">–</span></li>
+  <li class="list-group-item">Referrer-Policy: <span id="secReferrer">–</span></li>
+  <li class="list-group-item">TLS expires in: <span id="secTlsDays">–</span> giorni</li>
+  <li class="list-group-item">Server header: <span id="secServerHeader">–</span></li>
+</ul>
+<div id="secAdvice" class="alert d-none"></div>
