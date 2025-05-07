@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WP Analyzer Completo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Loader overlay */
+    #loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(255,255,255,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    .small-list { max-height: 150px; overflow-y: auto; }
+  </style>
+</head>
+<body class="bg-light">
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="container py-4">
+    <div class="d-flex justify-content-between mb-3">
+      <h3>WP Analyzer Completo</h3>
+      <button id="darkToggle" class="btn btn-outline-secondary">Dark Mode</button>
+    </div>
+
+    <form class="row g-2 mb-3" onsubmit="event.preventDefault(); startAnalysis()">
+      <div class="col-md-4">
+        <input id="url" class="form-control" placeholder="URL sito (es. example.com)" required>
+      </div>
+      <div class="col-md-3">
+        <input id="username" class="form-control" placeholder="Username">
+      </div>
+      <div class="col-md-3">
+        <input id="password" type="password" class="form-control" placeholder="Password">
+      </div>
+      <div class="col-md-2 d-grid">
+        <button class="btn btn-primary">Avvia</button>
+      </div>
+    </form>
+
+    <ul class="nav nav-tabs mb-3" role="tablist">
+      <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-overview">Overview</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-performance">Performance</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-seo">SEO</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-accessibility">Accessibilità</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-security">Sicurezza</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-themes">Temi</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-plugins">Plugin</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-users">Utenti</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-reports">Report</button></li>
+    </ul>
+
+    <div class="tab-content">
+
+      <!-- OVERVIEW -->
+      <div class="tab-pane fade show active" id="tab-overview">
+        <div id="summary" class="mb-3"></div>
+        <canvas id="chart" height="100" class="mb-4"></canvas>
+        <input id="searchInput" class="form-control mb-3" placeholder="Cerca..." oninput="filterAccordion()">
+        <div id="contentAccordion" class="accordion mb-4"></div>
+        <div id="brokenSection" class="mb-4"></div>
+        <div class="mb-3">
+          <button class="btn btn-success me-2" onclick="exportCSV()">Esporta CSV</button>
+          <button class="btn btn-info me-2" onclick="exportJSON()">Esporta JSON</button>
+          <button class="btn btn-warning me-2" onclick="exportMD()">Esporta Markdown</button>
+          <button class="btn btn-outline-dark" onclick="saveReport()">Salva Report</button>
+        </div>
+      </div>
+
+      <!-- PERFORMANCE -->
+      <div class="tab-pane fade" id="tab-performance">
+        <h5>Performance</h5>
+        <ul class="list-group mb-3" id="perfList"></ul>
+        <div id="perfAdvice" class="alert d-none"></div>
+      </div>
+
+      <!-- SEO -->
+      <div class="tab-pane fade" id="tab-seo">
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label for="minScore">Min SEO Score:</label>
+            <input type="number" id="minScore" class="form-control" min="0" max="100" value="0" onchange="filterSEO()">
+          </div>
+          <div class="col-md-8 text-end align-self-end">
+            <label class="me-2">Ordina:</label>
+            <button class="btn btn-sm btn-outline-primary me-1" onclick="sortSEOAsc()">▲</button>
+            <button class="btn btn-sm btn-outline-primary" onclick="sortSEODesc()">▼</button>
+          </div>
+        </div>
+        <div id="seoList" class="list-group mb-4"></div>
+      </div>
+
+      <!-- ACCESSIBILITÀ -->
+      <div class="tab-pane fade" id="tab-accessibility">
+        <h5>Accessibilità Completa</h5>
+        <ul class="list-group mb-3">
+          <li class="list-group-item">Immagini totali: <span id="accessTotalImgs">–</span></li>
+          <li class="list-group-item">
+            Immagini senza alt: <span id="accessMissingAlt">–</span>
+            <button class="btn btn-sm btn-outline-secondary ms-2" onclick="toggleList('missingAltList')">Dettagli</button>
+          </li>
+          <li class="list-group-item">Campi form senza label: <span id="accessFormFields">–</span></li>
+          <li class="list-group-item">Link senza testo: <span id="accessEmptyLinks">–</span></li>
+          <li class="list-group-item">Landmark tags: <span id="accessLandmarks">–</span></li>
+          <li class="list-group-item">Skip links: <span id="accessSkipLinks">–</span></li>
+          <li class="list-group-item">Headings: <span id="accessHeadings">–</span></li>
+        </ul>
+        <div id="missingAltList" class="small-list mb-3 d-none list-group"></div>
+        <div id="accessAdvice" class="alert d-none"></div>
+      </div>
+
+      <!-- SICUREZZA -->
+      <div class="tab-pane fade" id="tab-security">
+        <h5>Security Audit Avanzato</h5>
+        <ul class="list-group mb-3">
+          <li class="list-group-item">HSTS: <span id="secHsts">–</span> (max-age: <span id="secHstsMaxAge">–</span>)</li>
+          <li class="list-group-item">CSP: <span id="secCsp">–</span></li>
+          <li class="list-group-item">HttpOnly cookie: <span id="secHttpOnly">–</span></li>
+          <li class="list-group-item">Secure cookie: <span id="secCookieSecure">–</span></li>
+          <li class="list-group-item">X-Frame-Options: <span id="secXfo">–</span></li>
+          <li class="list-group-item">X-XSS-Protection: <span id="secXss">–</span></li>
+          <li class="list-group-item">Referrer-Policy: <span id="secReferrer">–</span></li>
+          <li class="list-group-item">Cert. TLS (giorni restanti): <span id="secTlsDays">–</span></li>
+          <li class="list-group-item">Server header: <span id="secServerHeader">–</span></li>
+        </ul>
+        <div id="secAdvice" class="alert d-none"></div>
+      </div>
+
+      <!-- TEMI -->
+      <div class="tab-pane fade" id="tab-themes">
+        <h5>Temi Installati</h5>
+        <ul class="list-group mb-3" id="themesList"></ul>
+      </div>
+
+      <!-- PLUGIN -->
+      <div class="tab-pane fade" id="tab-plugins">
+        <h5>Plugin Installati</h5>
+        <ul class="list-group mb-3" id="pluginsList"></ul>
+      </div>
+
+      <!-- UTENTI -->
+      <div class="tab-pane fade" id="tab-users">
+        <h5>Utenti Registrati</h5>
+        <ul class="list-group mb-3" id="usersList"></ul>
+      </div>
+
+      <!-- REPORT -->
+      <div class="tab-pane fade" id="tab-reports">
+        <h5>Carica Report JSON</h5>
+        <input type="file" id="reportUpload" accept="application/json" class="form-control mb-3" onchange="handleUpload(event)">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal SEO Detail -->
+  <div class="modal fade" id="seoModal" tabindex="-1">
+    <div class="modal-dialog"><div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="seoModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="seoModalBody"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+      </div>
+    </div></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}?v=8.4111"></script>
+</body>
+</html>
