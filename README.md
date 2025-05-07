@@ -5,6 +5,8 @@ Analizzatore completo di siti WordPress in locale, con frontend HTML/CSS/JS e ba
 ---
 
 ## 📂 Struttura del progetto
+
+```
 wp_page_analyzer/
 │
 ├── app.py # Server Flask principale
@@ -18,10 +20,12 @@ wp_page_analyzer/
 │ └── index.html # Frontend HTML
 │
 └── static/
-├── js/
-│   └── main.js # Logica client-side
-└── css/
-└── style.css # (opzionale) stili custom
+    ├── js/
+    │   └── main.js # Logica client-side
+    └── css/
+        └── style.css # (opzionale) stili custom
+```
+
 ---
 
 ## 🚀 Setup & Installazione
@@ -54,7 +58,7 @@ wp_page_analyzer/
     python app.py
     ```
 
-5.  Apri il browser su `http://127.0.0.1:5000/`
+5.  Apri il browser su `http://12.0.0.1:5000/`
 
 ---
 
@@ -124,3 +128,31 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+```
+
+---
+
+## 🤝 Contribuire
+
+Se desideri contribuire al progetto:
+
+1.  Esegui il fork (biforcazione) di questo repository.
+2.  Crea un nuovo branch per la tua feature:
+
+    ```bash
+    git checkout -b feature/mia-feature
+    ```
+
+3.  Apporta le tue modifiche e fai commit:
+
+    ```bash
+    git commit -am "Aggiunta mia feature"
+    ```
+
+4.  Esegui il push sul tuo fork e apri una Pull Request al repository originale.
+
+---
+
+## 📄 Licenza
+
+Questo progetto è distribuito sotto la **MIT License**. Vedi il file `LICENSE` per maggiori dettagli.
