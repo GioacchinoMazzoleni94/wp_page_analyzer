@@ -80,58 +80,6 @@ Naviga tra le tab per visualizzare le analisi:
 
 ---
 
-## 📦 Pubblicazione su GitHub
-
-1.  Crea un nuovo repository su GitHub (senza aggiungere un README iniziale).
-2.  Nel tuo progetto locale, inizializza Git e connetti il repository:
-
-    ```bash
-    git init
-    git add .
-    git commit -m "Initial commit"
-    git branch -M main
-    git remote add origin [https://github.com/](https://github.com/)<tuo-username>/wp_page_analyzer.git
-    git push -u origin main
-    ```
-
-3.  Per gli aggiornamenti successivi:
-
-    ```bash
-    git add .
-    git commit -m "Descrivi le modifiche"
-    git push
-    ```
-
----
-
-## .gitignore
-
-Crea un file chiamato `.gitignore` nella root del progetto con questo contenuto per escludere file e directory non necessari dal controllo di versione:
-
-```gitignore
-# Python
-__pycache__/
-*.pyc
-venv/
-.env
-
-# Flask
-instance/
-
-# Reports
-reports/
-
-# System
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-```
-
----
-
 ## 🤝 Contribuire
 
 Se desideri contribuire al progetto:
