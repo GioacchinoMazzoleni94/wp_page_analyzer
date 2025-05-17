@@ -58,7 +58,7 @@ wp_page_analyzer/
     python app.py
     ```
 
-5.  Apri il browser su `http://12.0.0.1:5000/`
+5.  Apri il browser su `http://127.0.0.1:5000/`
 
 ---
 
@@ -98,6 +98,16 @@ Se desideri contribuire al progetto:
     ```
 
 4.  Esegui il push sul tuo fork e apri una Pull Request al repository originale.
+
+---
+
+## 🧪 Test
+
+Per eseguire i test automatici basta lanciare:
+
+```bash
+pytest
+```
 
 ---
 

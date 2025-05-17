@@ -43,6 +43,27 @@ export function bindUI() {
   document.getElementById('exportMd')?.addEventListener('click', () => { exportMD(); });
   document.getElementById('saveReport')?.addEventListener('click', () => { saveReport(); });
   document.getElementById('uploadReport')?.addEventListener('change', evt => { handleUpload(evt); });
+
+  const darkToggle = document.getElementById('darkToggle');
+  const body = document.body;
+  if (darkToggle) {
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('bg-dark');
+      body.classList.remove('bg-light');
+      darkToggle.textContent = 'Light Mode';
+    }
+    darkToggle.addEventListener('click', () => {
+      const isDark = body.classList.toggle('bg-dark');
+      body.classList.toggle('bg-light', !isDark);
+      if (isDark) {
+        localStorage.setItem('darkMode', 'true');
+        darkToggle.textContent = 'Light Mode';
+      } else {
+        localStorage.removeItem('darkMode');
+        darkToggle.textContent = 'Dark Mode';
+      }
+    });
+  }
 }
 
 /**
