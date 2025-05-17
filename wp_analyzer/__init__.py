@@ -24,6 +24,7 @@ def create_app():
     from .users           import bp as users_bp;          app.register_blueprint(users_bp,          url_prefix='/analyze/users')
     from .broken          import bp as broken_bp;         app.register_blueprint(broken_bp,         url_prefix='/analyze/broken')
     from .reports         import bp as reports_bp;        app.register_blueprint(reports_bp,        url_prefix='/reports')
+    from .export_csv      import bp as export_csv_bp;     app.register_blueprint(export_csv_bp)
 
     @app.route('/')
     def index():
