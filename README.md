@@ -60,6 +60,18 @@ wp_page_analyzer/
 
 5.  Apri il browser su `http://127.0.0.1:5000/`
 
+### 🐳 Avvio rapido con Docker
+
+In alternativa puoi costruire e avviare l'applicazione tramite Docker Compose:
+
+```bash
+docker compose up -d
+```
+
+Il servizio sarà disponibile su `http://localhost:5000` (puoi cambiare la porta
+modificando `docker-compose.yml`). I report JSON vengono salvati nella cartella
+`reports/` montata come volume.
+
 ---
 
 ## ⚙️ Utilizzo
